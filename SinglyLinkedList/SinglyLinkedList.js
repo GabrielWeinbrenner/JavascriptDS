@@ -63,6 +63,29 @@ class SinglyLinkedList{
         this.length++;
         return this
     }
+    get(index){
+        if(index < 0 || index > this.length){ return null }
+        var temp = this.head;
+        var a = 0;
+        while(a !== index){
+            temp = temp.next;
+            a++;
+        }
+        return temp;
+    }
+    set(index, val){
+        var temp = this.get(index);
+        if(temp === null) return false;
+        temp.val = val;
+        return true;
+    }
+    traverse(){
+        var temp = this.head;
+        while(temp){
+            console.log(temp.val);
+            temp = temp.next;
+        }
+    }
 }
 
 var list = new SinglyLinkedList();
@@ -73,4 +96,7 @@ list.push(30);
 list.push(40);
 list.unshift(30);
 console.log(list.pop())
-console.log(list)
+// console.log(list.traverse())
+console.log(list.get(1));
+console.log(list.set(1, 20));
+console.log(list.get(1));
