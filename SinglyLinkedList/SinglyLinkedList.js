@@ -79,6 +79,29 @@ class SinglyLinkedList{
         temp.val = val;
         return true;
     }
+    insert(index,val){
+        if(index < 0 || index > this.length) return false;
+        if(index === this.length-1) { !!this.push(val); }
+        if (index === 0) { !!this.unshift(val); } 
+        var temp = new Node(val);
+        var prev = this.get(index - 1);
+        var aft = prev.next;
+        prev.next = temp;
+        temp.next = aft;
+        this.length++;
+        return true;
+    }
+    remove(index){
+        if(index < 0 || index > this.length) return false;
+        if(index == this.length-1) !!this.pop();
+        if(index == 0) !!this.shift();
+        var temp = this.get(index);
+        var prev = this.get(index-1);
+        var aft = temp.next;
+        prev.next = aft;
+        this.length--;
+        return temp;
+    }
     traverse(){
         var temp = this.head;
         while(temp){
@@ -95,8 +118,14 @@ list.push(20);
 list.push(30);
 list.push(40);
 list.unshift(30);
-console.log(list.pop())
-// console.log(list.traverse())
-console.log(list.get(1));
-console.log(list.set(1, 20));
-console.log(list.get(1));
+// console.log(list.pop())
+// // console.log(list.traverse())
+// console.log(list.get(1));
+// console.log(list.set(1, 20));
+// console.log(list.get(1));
+console.log(list.traverse());
+console.log(list.insert(3, 80));
+console.log(list.traverse());
+console.log(list.remove(3));
+
+console.log(list.traverse());
