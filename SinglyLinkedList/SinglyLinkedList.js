@@ -102,6 +102,23 @@ class SinglyLinkedList{
         this.length--;
         return temp;
     }
+    reverse(){
+        var temp = this.tail;
+        this.tail = this.head;
+        this.head = temp;
+
+        var next = null;
+        var prev = null; 
+        var node = this.tail;
+        while(node){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        console.log(this);
+        return this;
+    }
     traverse(){
         var temp = this.head;
         while(temp){
@@ -124,8 +141,5 @@ list.unshift(30);
 // console.log(list.set(1, 20));
 // console.log(list.get(1));
 console.log(list.traverse());
-console.log(list.insert(3, 80));
-console.log(list.traverse());
-console.log(list.remove(3));
-
+list.reverse();
 console.log(list.traverse());
