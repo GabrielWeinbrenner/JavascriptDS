@@ -63,6 +63,38 @@ class DoublyLinkedList {
         this.length++;
         return temp;
     }
+    get(index){
+        if(index > this.length/2){
+            var n = this.tail;
+            var c = this.length -1;
+            while(n){
+                if(c === index){
+                    return n;
+                }
+                c--;
+                n = n.prev;
+            }
+        }else{
+            var n = this.head;
+            var c = 0;
+            while (n) {
+                if (c === index) {
+                    return n;
+                }
+                c++;
+                n = n.next;
+            }
+        }
+        return null;
+    }
+    set(index, val){
+        var node = this.get(index);
+        if(node){
+            node.val = val;
+            return true;
+        }
+        return false;
+    }
     traverse(){
         var n = this.head;
         var s = "";
@@ -78,7 +110,15 @@ var list = new DoublyLinkedList(10);
 list.push(10);
 list.push(20);
 list.push(30);
+list.push(40);
+list.push(50);
+list.push(60);
+
 list.pop();
 list.unshift(1);
 list.shift();
 console.log(list.traverse());
+list.set(3, 10);
+console.log(list.traverse());
+
+console.log(list.get(10));
