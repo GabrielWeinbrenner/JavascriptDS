@@ -116,7 +116,6 @@ class SinglyLinkedList{
             prev = node;
             node = next;
         }
-        console.log(this);
         return this;
     }
     traverse(){

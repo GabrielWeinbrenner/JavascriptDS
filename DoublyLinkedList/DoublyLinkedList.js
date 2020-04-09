@@ -110,6 +110,22 @@ class DoublyLinkedList {
         this.length++;
         return true;
     }
+    remove(index){
+        if (index < 0 || index > this.length) return false;
+        if(index === 0) { return !!this.shift() }
+        if(index === this.length-1) { return !!this.pop() }
+        var node = this.get(index);
+        var prevNode = node.prev;
+        var nextNode = node.next;
+
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+        node.next = null;
+        node.prev = null;
+        this.length--;
+        return node;
+    
+    }
     traverse(){
         var n = this.head;
         var s = "";
@@ -135,4 +151,5 @@ list.shift();
 console.log(list.traverse());
 list.set(3, 10);
 list.insert(2, 20);
+list.remove(3);
 console.log(list.traverse());
