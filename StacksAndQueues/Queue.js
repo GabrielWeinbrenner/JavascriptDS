@@ -7,31 +7,38 @@ class Node{
 
 class Queue{
     constructor(){
-        this.first = null;
-        this.last = null;
+        this.top = null;
+        this.bottom = null;
         this.size = 0;
     }
     enqueue(val){
         var node = new Node(val);
-        if(this.size === 0) { this.first = node; this.last = node;}
+        if(this.size === 0) { this.top = node; this.bottom = node;}
         else {
-            this.last.next = node;
-            this.last = node;
+            this.bottom.next = node;
+            this.bottom = node;
         }
         this.size++;
         return node;
     }
     dequeue(){ 
         if(this.size === 0){ return null; }
-        var node = this.first;
+        var node = this.top;
         if(this.size === 1){
-            this.first = null;
-            this.last = null;
+            this.top = null;
+            this.bottom = null;
         }else{
-            this.first = node.next;
+            this.top = node.next;
         }
         this.size--;
         return node;
+    }
+    view(){
+        var n = this.top;
+        while(n){
+            console.log(n.val);
+            n = n.next;
+        }
     }
 }
 
@@ -40,7 +47,8 @@ queue.enqueue(10);
 queue.enqueue(20);
 queue.enqueue(30);
 queue.enqueue(40);
-
+queue.view()
+console.log("")
 queue.dequeue();
-
+queue.view()
 console.log(queue);
