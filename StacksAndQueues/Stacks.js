@@ -30,7 +30,7 @@ class Stack {
             this.top = temp.next;    
         }
         this.size--;
-        return this;
+        return temp;
     }
     view(){
         var n = this.top;
@@ -40,10 +40,31 @@ class Stack {
         }
     }
 }
+function reverseOf(bracket){
+    if(bracket === "{") return "}"; 
+    if(bracket === "(") return ')';
+    if(bracket === "[") return "]";
+    if (bracket === "}") return "{";
+    if (bracket === ")") return '(';
+    if (bracket === "]") return "[";
+}
+function isLeft(bracket){
+    if(bracket == "{" || bracket == "(" || bracket == "[") return true;
+    return false;
+}
+function checkIfBracketMatch(bracket){
+    var stack = new Stack();
 
-var stack = new Stack();
-stack.push(10).push(20).push(30).push(40);
-stack.view();
-stack.pop();
-stack.view();
-console.log(stack);
+    var bracketString = bracket.split("");
+    for (var i = 0; i < bracketString.length ;i++){
+        var rev = reverseOf(bracketString[i]);
+        if(isLeft(bracketString[i])){
+            stack.push(bracketString[i])
+        }else if(stack.pop().val != rev){
+            return false;
+        }
+    }    
+    return stack.size === 0 ? true : false;
+}
+
+console.log(checkIfBracketMatch("[[{{}}]][]{}{}{}{}{}{}"));
