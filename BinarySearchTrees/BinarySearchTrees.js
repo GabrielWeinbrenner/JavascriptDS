@@ -60,9 +60,85 @@ class BinarySearchTree {
             }
         }
     }
+    bfs(){
+        var queue = [];
+        var visited = [];
+        queue.unshift(this.root);
+        while(queue.length){
+            var n = queue.shift();
+            visited.push(n.val);
+            if(n.left){
+                queue.unshift(n.left);
+            } 
+            if (n.right){
+                queue.unshift(n.right);
+            } 
+        }
+        return visited;
+    }
+    dfspre(){
+        var visited = [];
+        var current = this.root;
+        function helper(n){
+            visited.push(n.val);
+            if(n.left){
+                helper(n.left);
+            }
+            if(n.right){
+                helper(n.right);
+            }
+        }
+        helper(current);
+        return visited;
+    }
+    dfspost(){
+        var visited = [];
+        var current = this.root;
+        function helper(n) {
+            if (n.left) {
+                helper(n.left);
+            }
+            if (n.right) {
+                helper(n.right);
+            }
+            visited.push(n.val);
+
+        }
+        helper(current);
+        return visited;     
+    }
+    dfsin() {
+        var visited = [];
+        var current = this.root;
+        function helper(n) {
+
+            if (n.left) {
+                helper(n.left);
+            }
+            visited.push(n.val);
+
+            if (n.right) {
+                helper(n.right);
+            }
+
+
+        }
+        helper(current);
+        return visited;
+    }
 }
 
 var tree = new BinarySearchTree();
-tree.insert(10).insert(20).insert(30);
+tree.insert(10).insert(20).insert(30).insert(50).insert(4).insert(5);
 console.log(tree);
 console.log(tree.find(20));
+console.log("-----")
+var s = [];
+s.unshift(10);
+console.log(s.shift());
+console.log("-----")
+
+console.log(tree.bfs());
+console.log(tree.dfspre());
+console.log(tree.dfspost());
+console.log(tree.dfsin());
