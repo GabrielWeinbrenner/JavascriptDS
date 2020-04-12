@@ -135,6 +135,24 @@ class DoublyLinkedList {
         }
         return s;
     }
+    reverse(){
+        var temp = this.tail;
+        this.tail = this.head;
+        this.head = temp;
+        var n = this.tail;
+        var next = null;
+        var prev = n.next;
+        while(n){
+            n.next = next;
+            n.prev = prev;
+            n = n.prev;
+            if(n !== null){
+                prev = n.next;
+                next = n.prev;
+            }
+        }
+        return this;
+    }
 }
 
 var list = new DoublyLinkedList(10);
@@ -152,4 +170,9 @@ console.log(list.traverse());
 list.set(3, 10);
 list.insert(2, 20);
 list.remove(3);
+console.log(list.traverse());
+
+
+list.reverse();
+console.log(list);
 console.log(list.traverse());
