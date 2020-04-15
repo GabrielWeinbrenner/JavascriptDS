@@ -22,16 +22,13 @@ class MaxBinaryHeap{
         while(parentIndex < v.length){
             var leftChild = 2 * parentIndex + 1;
             var rightChild = 2 * parentIndex + 2;
-            console.log(leftChild,rightChild,v[parentIndex]);
             if(v[leftChild] > v[parentIndex] && v[rightChild] > v[parentIndex]){
                 if(v[leftChild] > v[rightChild]){
                     [v[leftChild], v[parentIndex]] = [v[parentIndex], v[leftChild]];
                     parentIndex = 2 * parentIndex + 1;
                 }else if(v[rightChild] > v[leftChild]){
                     console.log(v[parentIndex], v[rightChild]);
-                    // [v[rightChild], v[parentIndex]] = [v[parentIndex], v[rightChild]];
                     [v[parentIndex], v[rightChild]] = [v[rightChild], v[parentIndex]];
-                    console.log(this.values);
                     parentIndex = 2 * parentIndex + 2;
                 }
             }else if(v[leftChild] > v[parentIndex]){
@@ -43,9 +40,11 @@ class MaxBinaryHeap{
             }else{
                 break;
             }
-            console.log(parentIndex);
         }
         return n;
+    }
+    removeRefactored(){
+        
     }
 }
 
