@@ -111,7 +111,6 @@ class BinarySearchTree {
         var visited = [];
         var current = this.root;
         function helper(n) {
-
             if (n.left) {
                 helper(n.left);
             }
@@ -120,8 +119,6 @@ class BinarySearchTree {
             if (n.right) {
                 helper(n.right);
             }
-
-
         }
         helper(current);
         return visited;
