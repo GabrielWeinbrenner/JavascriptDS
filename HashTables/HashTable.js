@@ -49,7 +49,8 @@ class HashTable {
         for (var i = 0; i < this.keyMap.length; i++) {
             if (this.keyMap[i]) {
                 for (var j = 0; j < this.keyMap[i].length; j++) {
-                    arr.push(this.keyMap[i][j][1])
+                    if (!arr.includes(this.keyMap[i][j][1]))
+                        arr.push(this.keyMap[i][j][1])
                 }
             }
         }
