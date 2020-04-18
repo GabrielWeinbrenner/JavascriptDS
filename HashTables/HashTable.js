@@ -24,18 +24,43 @@ class HashTable {
     }
     get(key){
         var keyIndex = this._hash(key);
-        var arr = this.keyMap[keyIndex];
-        for(var j = 0; j < arr.length; j++){
-            if(arr[j][0] == key){
-                return arr[j][1];
+        if (this.keyMap[keyIndex]){
+            for (var j = 0; j < this.keyMap[keyIndex].length; j++){
+                if (this.keyMap[keyIndex][j][0] == key){
+                    return this.keyMap[keyIndex][j][1];
+                }
             }
         }
         return undefined;
+    }
+    keys(){
+        var arr = [];
+        for(var i = 0; i < this.keyMap.length; i++){
+            if(this.keyMap[i]){
+                for(var j = 0; j < this.keyMap[i].length;j++){
+                    arr.push(this.keyMap[i][j][0])
+                }
+            }
+        }
+        return arr;
+    }
+    values() {
+        var arr = [];
+        for (var i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (var j = 0; j < this.keyMap[i].length; j++) {
+                    arr.push(this.keyMap[i][j][1])
+                }
+            }
+        }
+        return arr;
     }
 }
 
 var h = new HashTable(10);
 
-h.set("helo", 10).set("hel", 3).set("jjsf", 4).set("fwfw", 1);
+h.set("helo", 10).set("hel", 3).set("jjsf", 4).set("fwfw", 1).set("french", 20).set("jjfox",10);
 
 console.log(h.get("jjsf"));
+console.log(h.get('32'));
+console.log(h.values());
