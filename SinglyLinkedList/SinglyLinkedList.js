@@ -125,6 +125,14 @@ class SinglyLinkedList{
             temp = temp.next;
         }
     }
+    swap(index1, index2) {
+        var n1 = this.get(index1);
+        var n2 = this.get(index2);
+        var t = n1.val;
+        n1.val = n2.val;
+        n2.val = t
+
+    }
 }
 
 var list = new SinglyLinkedList();
@@ -139,6 +147,6 @@ list.unshift(30);
 // console.log(list.get(1));
 // console.log(list.set(1, 20));
 // console.log(list.get(1));
-console.log(list.traverse());
-list.reverse();
-console.log(list.traverse());
+console.log(list);
+list.swap(0,2);
+console.log(list);
