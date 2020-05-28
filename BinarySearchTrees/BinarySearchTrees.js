@@ -37,6 +37,27 @@ class BinarySearchTree {
             }
         }
     }
+    insertRecursive(val, root = this.root){
+        console.log(val);
+        console.log(root);
+        var newNode = new Node(val);
+        if (!root) {  this.root = newNode;}
+        else{
+            if(root.val < val){
+                if(root.right == null){
+                    root.right = newNode;
+                }else{
+                    this.insertRecursive(val, root.right);
+                }
+            }else if(root.val > val){
+                if (root.left == null) {
+                    root.left = newNode;
+                } else {
+                    this.insertRecursive(val, root.left);
+                }            
+            }
+        }
+    }
     find(val){
         if(this.root === null) { return undefined}
         else{
@@ -126,7 +147,10 @@ class BinarySearchTree {
 }
 
 var tree = new BinarySearchTree();
-tree.insert(10).insert(20).insert(30).insert(50).insert(4).insert(5);
+tree.insertRecursive(10)
+tree.insertRecursive(20)
+tree.insertRecursive(30)
+tree.insertRecursive(5)
 console.log(tree);
 console.log(tree.find(20));
 console.log("-----")

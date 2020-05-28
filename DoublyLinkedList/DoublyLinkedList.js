@@ -130,7 +130,7 @@ class DoublyLinkedList {
         var n = this.head;
         var s = "";
         while(n){
-            n.next !== null ? s+=n.val+"->" : s+=n.val;
+            n.next !== null ? s+=n.val+"<->" : s+=n.val;
             n = n.next;
         }
         return s;
