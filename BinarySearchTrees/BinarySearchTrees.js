@@ -144,24 +144,23 @@ class BinarySearchTree {
     }
 }
 function isValidTree(root){
-    if(!root){ return true; }
-    var currentNode = root;
-    var q = []
-    q.unshift(currentNode);
-    while(q.length){
-        currentNode = q.shift();
-        if (currentNode.left) {
-            q.unshift(currentNode.left);
-            if(currentNode.left.val > currentNode.val){
-                return false;
-            }
+    if(!root) return true;
+    var stack = [{ node: root, minimum: -Infinity, maximum: Infinity}];
+
+    while(stack.length){
+        var props = stack.pop();
+        var node = props.node;
+        var minimum = props.minimum;
+        var maximum = props.maximum;
+        if(node.val < minimum || node.val > maximum){
+            return false;
         }
-        if (currentNode.right) {
-            q.unshift(currentNode.right);
-            if (currentNode.right.val < currentNode.val) {
-                return false;
-            }
-        } 
+        if(node.left){
+            stack.push({ node: node.left, minimum: minimum, maximum: node.val});
+        }
+        if(node.right){
+            stack.push({ node: node.right, minimum: node.val, maximum: maximum});
+        }
     }
     return true;
 }
