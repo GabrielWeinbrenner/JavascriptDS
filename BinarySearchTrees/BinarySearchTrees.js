@@ -165,6 +165,14 @@ function isValidTree(root){
     }
     return true;
 }
+function validateBST(node, min, max){
+    if(!node) return true;
+
+    if(node.val < min || node.val > max){
+        return false;
+    }
+    return validateBST(node.left, min, node.val) && validateBST(node.right, node.val, max);
+}
 var root = new Node(10);
 var newNode = new Node(4);
 var newNode1 = new Node(11);
@@ -178,6 +186,8 @@ tree.insertRecursive(20)
 tree.insertRecursive(30)
 tree.insertRecursive(5)
 console.log(isValidTree(tree.root));
+console.log(validateBST(root));
+console.log(validateBST(tree.root));
 // console.log(tree);
 // console.log(tree.find(20));
 // console.log("-----")
