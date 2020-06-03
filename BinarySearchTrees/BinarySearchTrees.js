@@ -38,8 +38,6 @@ class BinarySearchTree {
         }
     }
     insertRecursive(val, root = this.root){
-        console.log(val);
-        console.log(root);
         var newNode = new Node(val);
         if (!root) {  this.root = newNode;}
         else{
@@ -73,7 +71,7 @@ class BinarySearchTree {
                     }
                 }else if(val < check.val){
                     if(check.left !== null){
-                        check = checck.left;
+                        check = check.left;
                     }else{
                         return undefined;
                     }
@@ -145,21 +143,50 @@ class BinarySearchTree {
         return visited;
     }
 }
-
+function isValidTree(root){
+    if(!root){ return true; }
+    var currentNode = root;
+    var q = []
+    q.unshift(currentNode);
+    while(q.length){
+        currentNode = q.shift();
+        if (currentNode.left) {
+            q.unshift(currentNode.left);
+            if(currentNode.left.val > currentNode.val){
+                return false;
+            }
+        }
+        if (currentNode.right) {
+            q.unshift(currentNode.right);
+            if (currentNode.right.val < currentNode.val) {
+                return false;
+            }
+        } 
+    }
+    return true;
+}
+var root = new Node(10);
+var newNode = new Node(4);
+var newNode1 = new Node(11);
+root.left = newNode1;
+root.right = newNode;
+newNode1.left = new Node(5)
 var tree = new BinarySearchTree();
+console.log(isValidTree(root));
 tree.insertRecursive(10)
 tree.insertRecursive(20)
 tree.insertRecursive(30)
 tree.insertRecursive(5)
-console.log(tree);
-console.log(tree.find(20));
-console.log("-----")
-var s = [];
-s.unshift(10);
-console.log(s.shift());
-console.log("-----")
+console.log(isValidTree(tree.root));
+// console.log(tree);
+// console.log(tree.find(20));
+// console.log("-----")
+// var s = [];
+// s.unshift(10);
+// console.log(s.shift());
+// console.log("-----")
 
-console.log(tree.bfs());
-console.log(tree.dfspre());
-console.log(tree.dfspost());
-console.log(tree.dfsin());
+// console.log(tree.bfs());
+// console.log(tree.dfspre());
+// console.log(tree.dfspost());
+// console.log(tree.dfsin());
