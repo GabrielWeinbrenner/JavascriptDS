@@ -126,21 +126,13 @@ class BinarySearchTree {
         helper(current);
         return visited;     
     }
-    dfsin() {
-        var visited = [];
-        var current = this.root;
-        function helper(n) {
-            if (n.left) {
-                helper(n.left);
-            }
-            visited.push(n.val);
-
-            if (n.right) {
-                helper(n.right);
-            }
+    dfsin(node = this.root) {
+        if(!node){
+            return;
         }
-        helper(current);
-        return visited;
+        this.dfsin(node.left);
+        console.log(node.val);
+        this.dfsin(node.right);
     }
 }
 function isValidTree(root){
@@ -187,6 +179,7 @@ tree.insertRecursive(5)
 console.log(isValidTree(tree.root));
 console.log(validateBST(root));
 console.log(validateBST(tree.root));
+console.log(tree.dfsin())
 // console.log(tree);
 // console.log(tree.find(20));
 // console.log("-----")
