@@ -126,29 +126,48 @@ class BinarySearchTree {
         helper(current);
         return visited;     
     }
-    dfsin(node = this.root, count = 0) {
-        count++;
+    dfsin(node = this.root, count = [0]) {
         if(!node){
             return;
         }
         this.dfsin(node.right, count);
-        console.log(node.val, count);
+        count[0]++;
+
+        console.log(node.val, count[0]);
 
         this.dfsin(node.left, count);
     }
-
-    secondLargest(node = this.root, count = [0]) {
+    dfsIterative(){
+        var s = []
+        var results = [];
+        s.push(this.root);
+        while(s){
+            var node = s.pop();
+            if(!node){
+                break;
+            }
+            results.push(node.val);
+            if(node.right != null){
+                s.push(node.right);
+            }
+            if(node.left != null){
+                s.push(node.left);
+            }
+        }
+        return results;
+    }
+    nthLargest(node, count, n) {
         if(!node){
             return;
         }
 
-        this.secondLargest(node.right, count);
+        this.nthLargest(node.right, count, n);
         count[0]++;
-        if(count == 2){
+        if(count[0] == n){
             console.log(node.val);
             return;
         }
-        this.secondLargest(node.left, count);
+        this.nthLargest(node.left, count, n);
     }
 }
 function isValidTree(root){
@@ -192,9 +211,8 @@ treeTwo.insertRecursive(15)
 treeTwo.insertRecursive(50)
 treeTwo.insertRecursive(5)
 treeTwo.insertRecursive(40)
+console.log(tree.dfsIterative());
+tree.nthLargest(tree.root, [0], 3);
+console.log(treeTwo.dfsIterative());
 
-// console.log(tree.dfsin());
-console.log(tree.secondLargest());
-// console.log(treeTwo.bfs());
-
-console.log(treeTwo.secondLargest());
+treeTwo.nthLargest(treeTwo.root, [0], 2);
