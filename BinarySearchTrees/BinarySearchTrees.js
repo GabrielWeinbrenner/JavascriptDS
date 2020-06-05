@@ -126,13 +126,28 @@ class BinarySearchTree {
         helper(current);
         return visited;     
     }
-    dfsin(node = this.root) {
+    dfsin(node = this.root, count = 0) {
+        count++;
         if(!node){
             return;
         }
-        this.dfsin(node.left);
-        console.log(node.val);
-        this.dfsin(node.right);
+        this.dfsin(node.right, count);
+        console.log(node.val, count);
+
+        this.dfsin(node.left, count);
+    }
+    secondLargest(node, count){
+        if(node == null || count >= 2){
+            return;
+        }
+        count = count + 1;
+
+        this.secondLargest(node.right, count);
+        if(count == 2){
+            console.log(node);
+            return;
+        }
+        this.secondLargest(node.left,count);
     }
 }
 function isValidTree(root){
@@ -164,31 +179,21 @@ function validateBST(node, min, max){
     }
     return validateBST(node.left, min, node.val) && validateBST(node.right, node.val, max);
 }
-var root = new Node(10);
-var newNode = new Node(4);
-var newNode1 = new Node(11);
-root.left = newNode1;
-root.right = newNode;
-newNode1.left = new Node(5)
 var tree = new BinarySearchTree();
-console.log(isValidTree(root));
 tree.insertRecursive(10)
 tree.insertRecursive(20)
 tree.insertRecursive(30)
 tree.insertRecursive(5)
-console.log(isValidTree(tree.root));
-console.log(validateBST(root));
-console.log(validateBST(tree.root));
-console.log(tree.dfsin())
-// console.log(tree);
-// console.log(tree.find(20));
-// console.log("-----")
-// var s = [];
-// s.unshift(10);
-// console.log(s.shift());
-// console.log("-----")
+var treeTwo = new BinarySearchTree();
+treeTwo.insertRecursive(10)
+treeTwo.insertRecursive(20)
+treeTwo.insertRecursive(15)
+treeTwo.insertRecursive(50)
+treeTwo.insertRecursive(5)
+treeTwo.insertRecursive(40)
 
-// console.log(tree.bfs());
-// console.log(tree.dfspre());
-// console.log(tree.dfspost());
-// console.log(tree.dfsin());
+console.log(tree.dfsin());
+console.log(tree.secondLargest(tree.root, 0));
+console.log(treeTwo.bfs());
+
+console.log(treeTwo.secondLargest(treeTwo.root, 0));
