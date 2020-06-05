@@ -136,18 +136,19 @@ class BinarySearchTree {
 
         this.dfsin(node.left, count);
     }
-    secondLargest(node, count){
-        if(node == null || count >= 2){
+
+    secondLargest(node = this.root, count = [0]) {
+        if(!node){
             return;
         }
-        count = count + 1;
 
         this.secondLargest(node.right, count);
+        count[0]++;
         if(count == 2){
-            console.log(node);
+            console.log(node.val);
             return;
         }
-        this.secondLargest(node.left,count);
+        this.secondLargest(node.left, count);
     }
 }
 function isValidTree(root){
@@ -192,8 +193,8 @@ treeTwo.insertRecursive(50)
 treeTwo.insertRecursive(5)
 treeTwo.insertRecursive(40)
 
-console.log(tree.dfsin());
-console.log(tree.secondLargest(tree.root, 0));
-console.log(treeTwo.bfs());
+// console.log(tree.dfsin());
+console.log(tree.secondLargest());
+// console.log(treeTwo.bfs());
 
-console.log(treeTwo.secondLargest(treeTwo.root, 0));
+console.log(treeTwo.secondLargest());
