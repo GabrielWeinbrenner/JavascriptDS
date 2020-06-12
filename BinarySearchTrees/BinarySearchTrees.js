@@ -156,18 +156,26 @@ class BinarySearchTree {
         }
         return results;
     }
-    nthLargest(node, count, n) {
-        if(!node){
+    kthSmallest(root, k) {
+        var count = [0, 0];
+        this.dfsinKth(root, count, k);
+        return count[1];
+    };
+    dfsinKth(node, count, k) {
+        if (!node) {
             return;
         }
-
-        this.nthLargest(node.right, count, n);
+        this.dfsinKth(node.left, count, k);
         count[0]++;
-        if(count[0] == n){
-            console.log(node.val);
+        if (count[0] == k) {
+            count[1] = node.val;
             return;
         }
-        this.nthLargest(node.left, count, n);
+        this.dfsinKth(node.right, count, k);
+    }
+
+    reverseBinaryTree(){
+
     }
 }
 function isValidTree(root){
@@ -191,6 +199,7 @@ function isValidTree(root){
     }
     return true;
 }
+
 function validateBST(node, min, max){
     if(!node) return true;
 
